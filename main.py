@@ -46,7 +46,8 @@ def generate_seirmodel_from_image(image_path: str, user_input: str, output_fileN
         lang_specs = json.dumps(lang_specs_json, indent=2)
         
         # Load the image using the modern PIL library
-        img = PIL.Image.open(image_path)
+        img_path = os.path.join(os.path.dirname(__file__), "diagrams", image_path)
+        img = PIL.Image.open(img_path)
 
     except FileNotFoundError as err:
         print(f"Error: A required file was not found - {err}")
