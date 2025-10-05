@@ -1,0 +1,31 @@
+        1. The formula for the total flow of individuals moving from Exposed to Infectious is σ * E.
+        2. This model requires a per-capita rate, which is the rate at which a single individual transitions out of the compartment.
+        3. Therefore, the rate for this flow is simply the parameter σ (the latency rate).
+        4. The value for σ is given as 1/7 per day.
+        5. Calculation: σ = 1 / 7 = 0.14285714285714285.
+        -->
+    <outgoingFlows rate="0.14285714285714285" target="//@compartments.2" description="Latency"/>
+  </compartments>
+  <compartments PrimaryName="Infectious">
+    <!--
+        Reasoning for the 'Recovery' rate (I -> R):
+        1. The formula for the total flow of individuals moving from Infectious to Recovered is γ * I.
+        2. This model requires a per-capita rate, which is the rate at which a single individual transitions out of the compartment.
+        3. Therefore, the rate for this flow is the parameter γ (the recovery rate).
+        4. The value for γ is given as 1/14 per day.
+        5. Calculation: γ = 1 / 14 = 0.07142857142857142.
+        -->
+    <outgoingFlows rate="0.07142857142857142" target="//@compartments.3" description="Recovery"/>
+  </compartments>
+  <compartments PrimaryName="Recovered">
+    <!--
+        Reasoning for the 'Loss of immunity' rate (R -> S):
+        1. The formula for the total flow of individuals moving from Recovered to Susceptible is ω * R.
+        2. This model requires a per-capita rate, which is the rate at which a single individual transitions out of the compartment.
+        3. Therefore, the rate for this flow is the parameter ω (the immunity loss rate).
+        4. The value for ω is given as 1/365 per day.
+        5. Calculation: ω = 1 / 365 = 0.0027397260273972603.
+        -->
+    <outgoingFlows rate="0.0027397260273972603" target="//@compartments.0" description="Loss of immunity"/>
+  </compartments>
+</seir:SEIRModel>

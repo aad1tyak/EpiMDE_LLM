@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<seir:SEIRModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:seir="http://example.com/seirmodel">
+  <compartments PrimaryName="Susceptible" SecondaryName="Homosexual Men">
+    <!--
+      The rate for this flow is for the "Infection of susceptible homosexual men".
+      The corresponding formula is based on the force of infection, lambda_h (λ_h).
+      The per-capita rate is λ_h.
+      The formula for the force of infection on homosexual men is: λ_h = β_h * c_h * (I_h / N_h), where N_h is the total population of homosexual men (S_h + I_h).
+      The parameters β_h (0.44) and c_h (7) are provided.
+      However, the computation requires the explicit population counts for the number of infected homosexual men (I_h) and susceptible homosexual men (S_h) to calculate the total N_h.
+      These population values (I_h, S_h) were NOT provided in the user_input.
+      Therefore, the rate cannot be computed.
+    -->
+    <outgoingFlows rate="[[rate_missing]]" target="//@compartments.3" description="Infection of susceptible homosexual men"/>
+  </compartments>
+  <compartments PrimaryName="Susceptible" SecondaryName="Women">
+    <!--
+      The rate for this flow is for the "Infection of susceptible women".
+      The corresponding formula is based on the sum of forces of infection from heterosexual men (λ_m) and homosexual men (λ_hw).
+      The per-capita rate is λ_m + λ_hw.
+      The formula for λ_m is: β_s * c_s * (I_m / (S_m + I_m)).
+      The formula for λ_hw is: β_hw * c_hw * (I_h / (S_h + I_h)).
+      The parameters β_s (0.02), c_s (4), β_hw (0.018), and c_hw (2) are provided.
+      However, the computation requires the explicit population counts for infected heterosexual men (I_m), susceptible heterosexual men (S_m), infected homosexual men (I_h), and susceptible homosexual men (S_h).
+      These population values were NOT provided in the user_input.
+      Therefore, the rate cannot be computed.
+    -->
+    <outgoingFlows rate="[[rate_missing]]" target="//@compartments.4" description="Infection of susceptible women"/>
+  </compartments>
+  <compartments PrimaryName="Susceptible" SecondaryName="Heterosexual Men">
+    <!--
+      The rate for this flow is for the "Infection of susceptible heterosexual men".
+      The corresponding formula is based on the sum of forces of infection from women (λ_w) and homosexual men (λ_hm).
+      The per-capita rate is λ_w + λ_hm.
+      The formula for λ_w is: β_s * c_s * (I_w / (S_w + I_w)).
+      The formula for λ_hm is: β_hm * c_hm * (I_h / (S_h + I_h)).
+      The parameters β_s (0.02), c_s (4), β_hm (0.25), and c_hm (1) are provided.
+      However, the computation requires the explicit population counts for infected women (I_w), susceptible women (S_w), infected homosexual men (I_h), and susceptible homosexual men (S_h).
+      These population values were NOT provided in the user_input.
+      Therefore, the rate cannot be computed.
+    -->
+    <outgoingFlows rate="[[rate_missing]]" target="//@compartments.5" description="Infection of susceptible heterosexual men"/>
+  </compartments>
+  <compartments PrimaryName="Infectious" SecondaryName="Untreated Homosexual Men">
+    <!--
+      This flow represents the "Initial treatment of infected homosexual men".
+      The per-capita rate for an untreated individual to start treatment is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who receive treatment (p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: The formula for the rate is α * p.
+      Step 4: Substitute the values: rate = 0.3333 * 0.90.
+      Step 5: Calculate the final rate: rate = 0.29997.
+    -->
+    <outgoingFlows rate="0.29997" target="//@compartments.6" description="Initial treatment of infected homosexual men"/>
+    <!--
+      This flow represents the "Progression to AIDS for untreated homosexual men".
+      The per-capita rate for an untreated individual to progress to AIDS is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who do NOT receive treatment (1-p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: Calculate the proportion NOT receiving treatment: (1 - p) = 1 - 0.90 = 0.10.
+      Step 4: The formula for the rate is α * (1 - p).
+      Step 5: Substitute the values: rate = 0.3333 * 0.10.
+      Step 6: Calculate the final rate: rate = 0.03333.
+    -->
+    <outgoingFlows rate="0.03333" target="//@compartments.7" description="Progression to AIDS for untreated homosexual men"/>
+  </compartments>
+  <compartments PrimaryName="Infectious" SecondaryName="Untreated Women">
+    <!--
+      This flow represents the "Initial treatment of infected women".
+      The per-capita rate for an untreated individual to start treatment is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who receive treatment (p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: The formula for the rate is α * p.
+      Step 4: Substitute the values: rate = 0.3333 * 0.90.
+      Step 5: Calculate the final rate: rate = 0.29997.
+    -->
+    <outgoingFlows rate="0.29997" target="//@compartments.6" description="Initial treatment of infected women"/>
+    <!--
+      This flow represents the "Progression to AIDS for untreated women".
+      The per-capita rate for an untreated individual to progress to AIDS is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who do NOT receive treatment (1-p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: Calculate the proportion NOT receiving treatment: (1 - p) = 1 - 0.90 = 0.10.
+      Step 4: The formula for the rate is α * (1 - p).
+      Step 5: Substitute the values: rate = 0.3333 * 0.10.
+      Step 6: Calculate the final rate: rate = 0.03333.
+    -->
+    <outgoingFlows rate="0.03333" target="//@compartments.7" description="Progression to AIDS for untreated women"/>
+  </compartments>
+  <compartments PrimaryName="Infectious" SecondaryName="Untreated Heterosexual Men">
+    <!--
+      This flow represents the "Initial treatment of infected heterosexual men".
+      The per-capita rate for an untreated individual to start treatment is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who receive treatment (p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: The formula for the rate is α * p.
+      Step 4: Substitute the values: rate = 0.3333 * 0.90.
+      Step 5: Calculate the final rate: rate = 0.29997.
+    -->
+    <outgoingFlows rate="0.29997" target="//@compartments.6" description="Initial treatment of infected heterosexual men"/>
+    <!--
+      This flow represents the "Progression to AIDS for untreated heterosexual men".
+      The per-capita rate for an untreated individual to progress to AIDS is given by the product of the departure rate from infected compartments (α) and the proportion of infected individuals who do NOT receive treatment (1-p).
+      Step 1: Identify the parameter α, the departure rate from infected compartments. α = 0.3333.
+      Step 2: Identify the parameter p, the proportion receiving treatment. p = 0.90.
+      Step 3: Calculate the proportion NOT receiving treatment: (1 - p) = 1 - 0.90 = 0.10.
+      Step 4: The formula for the rate is α * (1 - p).
+      Step 5: Substitute the values: rate = 0.3333 * 0.10.
+      Step 6: Calculate the final rate: rate = 0.03333.
+    -->
+    <outgoingFlows rate="0.03333" target="//@compartments.7" description="Progression to AIDS for untreated heterosexual men"/>
+  </compartments>
+  <compartments PrimaryName="Treated">
+    <!--
+      This flow represents the "Progression to AIDS for treated individuals".
+      The per-capita rate for a treated individual to progress to AIDS (e.g., due to treatment failure) is given by the parameter δ.
+      Step 1: Identify the parameter δ, the rate of AIDS development in treated individuals.
+      Step 2: The value of δ is 0.018.
+      Step 3: The rate is therefore 0.018.
+    -->
+    <outgoingFlows rate="0.018" target="//@compartments.7" description="Progression to AIDS for treated individuals"/>
+  </compartments>
+  <compartments PrimaryName="Infectious" SecondaryName="living with AIDS"/>
+</seir:SEIRModel>
